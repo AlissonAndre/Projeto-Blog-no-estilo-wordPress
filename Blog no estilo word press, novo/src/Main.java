@@ -8,7 +8,7 @@ public class Main {
 		Categoria[] categoria = new Categoria[999];
 		int indicePost = 1;
 		int numeroPostsVerificacao = 1;
-		int indicePagina = 1; ///// casa comigo mih
+		int indicePagina = 1;  
 		int i=0;
 		int pagina = 0;
 		Pagina[] vetorPagina = new Pagina[999];
