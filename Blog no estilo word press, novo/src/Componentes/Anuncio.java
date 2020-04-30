@@ -1,3 +1,4 @@
+package Componentes;
 import java.util.Random;
 public class Anuncio {
 	private int valorAleatorio;

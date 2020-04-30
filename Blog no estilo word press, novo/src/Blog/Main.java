@@ -1,4 +1,10 @@
+package Blog;
 import java.util.Scanner;
+import Componentes.Anuncio;
+import Componentes.CadastroConta;
+import Componentes.Categoria;
+import Componentes.Pagina;
+import Componentes.Publicacao;
 
 public class Main {
 
@@ -8,7 +14,7 @@ public class Main {
 		Categoria[] categoria = new Categoria[999];
 		int indicePost = 1;
 		int numeroPostsVerificacao = 1;
-		int indicePagina = 1;  
+		int indicePagina = 1;
 		int i=0;
 		int pagina = 0;
 		Pagina[] vetorPagina = new Pagina[999];

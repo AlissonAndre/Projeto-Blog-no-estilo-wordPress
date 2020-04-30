@@ -1,3 +1,4 @@
+package Componentes;
 
 public class CadastroConta {
 	
