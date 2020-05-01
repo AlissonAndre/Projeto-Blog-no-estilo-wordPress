@@ -12,6 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		//Criação dos vetores de objeto
 		ArrayList<Publicacao> posts = new ArrayList<Publicacao>();
+		Categoria categoria = new Categoria();
 		int indicePost = 0;
 		int numeroPostsVerificacao = 1;
 		int indicePagina = 1;
@@ -20,8 +21,8 @@ public class Main {
 		int pagina = 0;
 		int valor1;
 		int valor2;
+		int variavelDeControleCategoria = 0;
 		ArrayList<Pagina> paginas = new ArrayList<Pagina>();
-		ArrayList<Categoria> categoria;
 		Anuncio anuncio = new Anuncio();
 		
 		//Variaveis do sistema
@@ -70,16 +71,7 @@ public class Main {
 					//Print de teste
 					System.out.println("Data: " + data);
 					
-					//Categoria
-					while(1) {
-						System.out.println("Escolha uma categoria uma categoria, por favor");
-						categoria = new ArrayList<Categoria>();
-						//categoria = new Categoria(); 
-						categoria.get(i).setCategoria(leitor.nextLine());
-						
-						
-						break;
-					}
+					
 						
 					//Assunto do post
 					System.out.println("Digite seu texto aqui: ");
@@ -88,9 +80,22 @@ public class Main {
 					
 					//Construtor classe publicacao
 					Publicacao nova = new Publicacao(tituloPublicacao, data, caixaTexto);
-					nova.adicionarCategoria(categoria);
 					
 					
+					//Categoria
+					variavelDeControleCategoria = 0;
+					while(variavelDeControleCategoria == 0) {
+						System.out.println("Escolha uma categoria uma categoria para o seu post: ");
+						categoria = new Categoria(); 
+						categoria.setCategoria(leitor.nextLine());
+						nova.adicionarCategoria(categoria);
+						
+						System.out.println("Digite 0 para adicionar mais uma categoria a esse post, ou 1 para continuar: ");
+						variavelDeControleCategoria = leitor.nextInt();
+						leitor.nextLine();
+						if(variavelDeControleCategoria == 1)
+							break;
+					}
 					
 					while(true) {
 						System.out.println("Digite 1 para salvar e publicar o post, ou digite 2 para apaga-lo: ");
