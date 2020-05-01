@@ -1,4 +1,5 @@
 package Blog;
+import java.util.ArrayList;
 import java.util.Scanner;
 import Componentes.Anuncio;
 import Componentes.CadastroConta;
@@ -10,8 +11,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		//Criação dos vetores de objeto
-		Publicacao[] vetorPost = new Publicacao[999];
-		Categoria[] categoria = new Categoria[999];
+		ArrayList<Publicacao> posts = new ArrayList<Publicacao>();
+		Publicacao vetorPost = new Publicacao[999];
+		Categoria categoria = new Categoria();
 		int indicePost = 1;
 		int numeroPostsVerificacao = 1;
 		int indicePagina = 1;
@@ -68,10 +70,10 @@ public class Main {
 					
 					//Categoria
 					System.out.println("Escolha uma categoria uma categoria, por favor");
-					categoria[indicePost] = new Categoria(); 
-					categoria[indicePost].setCategoria(leitor.nextLine());
+					categoria = new Categoria(); 
+					categoria.setCategoria(leitor.nextLine());
 					//print de teste
-					System.out.println("Categoria: " + categoria[indicePost].getCategoria());
+					System.out.println("Categoria: " + categoria.getCategoria());
 				
 				
 					//Assunto do post
@@ -80,12 +82,16 @@ public class Main {
 					System.out.println("Post: " + caixaTexto);
 					
 					//Construtor classe publicacao
-					vetorPost[indicePost] = new Publicacao(tituloPublicacao, data, caixaTexto);
+					Publicacao nova = new Publicacao(tituloPublicacao, data, caixaTexto);
+					nova.adicionarCategoria(categoria);
+					
+					// posts.add(nova); 
+					
 					
 					
 					//Prints de teste
 					System.out.println("Numero post: " + indicePost);
-					System.out.println("\nTitulo: " + vetorPost[indicePost].getTituloPost());
+					System.out.println("\nTitulo: " + posts.get(0).getTituloPost());
 					System.out.println("Data: " + vetorPost[indicePost].getData());
 					System.out.println("Texto: " + vetorPost[indicePost].getCaixaTexto());
 					
