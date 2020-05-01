@@ -25,6 +25,14 @@ public class Publicacao {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
+	public ArrayList<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(ArrayList<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
 	public void adicionarCategoria(Categoria categoria) {
 		// Se ja houver essa categoria nessa lista, a categoria não é adicionada
 		for(int indice = 0; indice < categorias.size(); indice++)

@@ -12,20 +12,19 @@ public class Main {
 	public static void main(String[] args) {
 		//Criação dos vetores de objeto
 		ArrayList<Publicacao> posts = new ArrayList<Publicacao>();
-		Publicacao vetorPost = new Publicacao[999];
 		Categoria categoria = new Categoria();
 		int indicePost = 1;
 		int numeroPostsVerificacao = 1;
 		int indicePagina = 1;
 		int i=0;
 		int pagina = 0;
-		Pagina[] vetorPagina = new Pagina[999];
+		ArrayList<Pagina> paginas = new ArrayList<Pagina>();
 		Anuncio anuncio = new Anuncio();
 		
 		//Variaveis do sistema
 		String tituloPublicacao;
 		String data;
-		String caixaTexto;
+		String caixaTexto; 
 		int saida = 0;
 		String nome;
 		int opt;
@@ -75,7 +74,6 @@ public class Main {
 					//print de teste
 					System.out.println("Categoria: " + categoria.getCategoria());
 				
-				
 					//Assunto do post
 					System.out.println("Digite seu texto aqui: ");
 					caixaTexto = leitor.nextLine();
@@ -85,15 +83,7 @@ public class Main {
 					Publicacao nova = new Publicacao(tituloPublicacao, data, caixaTexto);
 					nova.adicionarCategoria(categoria);
 					
-					// posts.add(nova); 
 					
-					
-					
-					//Prints de teste
-					System.out.println("Numero post: " + indicePost);
-					System.out.println("\nTitulo: " + posts.get(0).getTituloPost());
-					System.out.println("Data: " + vetorPost[indicePost].getData());
-					System.out.println("Texto: " + vetorPost[indicePost].getCaixaTexto());
 					
 					while(true) {
 						System.out.println("Digite 1 para salvar e publicar o post, ou digite 2 para apaga-lo: ");
@@ -101,29 +91,30 @@ public class Main {
 						opcao = leitor.nextInt();
 						if(opcao == 1) {
 							System.out.println("Deu certo!");
-							
+							posts.add(nova); 
 							//Controle de paginas, nao esta funcionando
 							//Indice post representa o numero do post atual
 							System.out.println("Post: " + indicePost);
 							//vetorPost[indicePost].setNumeroPagina(indicePost);
-							
 							//Quando existir apenas o primeiro post, esse if armazenara o numero dos posts na pagina, 
 							//isso servirá para a listagem de posts por pagina
 							int nPost = indicePost;
+							Pagina pag = new Pagina();
 							if(indicePost == 1) {
-								vetorPagina[indicePagina] = new Pagina();
-								vetorPagina[indicePagina].setPost1(nPost); 
-								vetorPagina[indicePagina].setPost2(nPost++);
-								System.out.println("Pagina: " + vetorPagina[indicePagina].getNumeroPagina());
+								pag.setPost1(nPost);
+								pag.setPost2(nPost++);
+								indicePagina = 1;
+								pag.setNumeroPagina(indicePagina);
+								paginas.add(pag);
 								
 							}else if( numeroPostsVerificacao + 1 <  indicePost){
 									numeroPostsVerificacao = indicePost;
+									pag = new Pagina();
+									pag.setPost1(nPost); 
+									pag.setPost2(nPost++);
 									indicePagina++;
-									vetorPagina[indicePagina] = new Pagina();
-									vetorPagina[indicePagina].setPost1(nPost); 
-									vetorPagina[indicePagina].setPost2(nPost++);
-									vetorPagina[indicePagina].setNumeroPagina(indicePagina);
-									System.out.println("Pagina: " + vetorPagina[indicePagina].getNumeroPagina());
+									pag.setNumeroPagina(indicePagina);
+									paginas.add(pag);
 							}
 							indicePost++;
 							System.out.println("Publicação concluida com sucesso! ");
@@ -156,13 +147,13 @@ public class Main {
 							//listar todos os posts
 							case 1: 
 								i=1;
-								while(i < indicePost){
+								while(i < posts.size()){
 									System.out.println("Indice" + indicePost + 
 											"\n========================================================\n" + "Valor de i " + i);
-									System.out.println("Titulo: " + vetorPost[i].getTituloPost()); 
-									System.out.println("Data: " + vetorPost[i].getData());
-									System.out.println("Categoria: " + categoria[i].getCategoria());
-									System.out.println("Texto do post: " + vetorPost[i].getCaixaTexto());
+									System.out.println("Titulo: " + posts.get(i).getTituloPost()); 
+									System.out.println("Data: " + posts.get(i).getData());
+									//System.out.println("Categoria: " + posts.get(i).getCategoria());
+									System.out.println("Texto do post: " + posts.get(i).getCaixaTexto());
 									System.out.println("Email autor: " + conta.getEmail());
 									i++;
 									System.out.println("\n$$$$ ANUNCIO $$$");
@@ -176,13 +167,13 @@ public class Main {
 							case 2: 
 								System.out.println("Digite o titulo do post: ");
 								nome = leitor.nextLine();
-								for(i=1; i < indicePost; i++) {
-									if(nome.equals(vetorPost[i].getTituloPost())) {
+								for(i=1; i < posts.size(); i++) {
+									if(nome.equals(posts.get(i).getTituloPost())) {
 										System.out.println("========================================================");
-										System.out.println("Titulo: " + vetorPost[i].getTituloPost()); 
-										System.out.println("Data: " + vetorPost[i].getData());
-										System.out.println("Categoria: " + categoria[i].getCategoria());
-										System.out.println("Texto do post: " + vetorPost[i].getCaixaTexto());
+										System.out.println("Titulo: " + posts.get(i).getTituloPost()); 
+										System.out.println("Data: " + posts.get(i).getData());
+										//System.out.println("Categoria: " + categoria[i].getCategoria());
+										System.out.println("Texto do post: " + posts.get(i).getCaixaTexto());
 										System.out.println("Email autor: " + conta.getEmail());
 										System.out.println("\n$$$$ ANUNCIO $$$");
 										anuncio.anuncio();
@@ -197,25 +188,25 @@ public class Main {
 								pagina = leitor.nextInt();
 								leitor.nextLine();
 										
-								int post1 = vetorPagina[pagina].getPost1();
-								if(vetorPost[post1] != null) {
+								int post1 = paginas.get(pagina).getPost1();
+								if(paginas.get(post1) != null) {
 									System.out.println("========================================================");
-									System.out.println("Titulo: " + vetorPost[post1].getTituloPost()); 
-									System.out.println("Data: " + vetorPost[post1].getData());
-									System.out.println("Categoria: " + categoria[post1].getCategoria());
-									System.out.println("Texto do post: " + vetorPost[post1].getCaixaTexto());
+									System.out.println("Titulo: " + posts.get(post1).getTituloPost()); 
+									System.out.println("Data: " + posts.get(post1).getData());
+									//System.out.println("Categoria: " + categoria[post1].getCategoria());
+									System.out.println("Texto do post: " + posts.get(post1).getCaixaTexto());
 									System.out.println("Email autor: " + conta.getEmail());	
 								}
 									
 										
-								int post2 = vetorPagina[pagina].getPost2();
+								int post2 = paginas.get(pagina).getPost2();
 								post2++;
-								if(vetorPost[post2] != null) {
+								if(paginas.get(post2) != null) {
 									System.out.println("========================================================");
-									System.out.println("Titulo: " + vetorPost[post2].getTituloPost()); 
-									System.out.println("Data: " + vetorPost[post2].getData());
-									System.out.println("Categoria: " + categoria[post2].getCategoria());
-									System.out.println("Texto do post: " + vetorPost[post2].getCaixaTexto());
+									System.out.println("Titulo: " + posts.get(post2).getTituloPost()); 
+									System.out.println("Data: " + posts.get(post2).getData());
+									//System.out.println("Categoria: " + categoria[post2].getCategoria());
+									System.out.println("Texto do post: " + posts.get(post2).getCaixaTexto());
 									System.out.println("Email autor: " + conta.getEmail());	
 								}
 								if(indicePost>1) {
@@ -234,13 +225,15 @@ public class Main {
 									System.out.println("Erro! Não há nenhuma publicação desta categoria!");
 									
 								}
-								for(i=1; i < indicePost; i++) {
-									if(nome.equals(categoria[i].getCategoria())) {
-										System.out.println("========================================================");
-										System.out.println("Titulo: " + vetorPost[i].getTituloPost()); 
-										System.out.println("Data: " + vetorPost[i].getData());
-										System.out.println("Categoria: " + categoria[i].getCategoria());
-										System.out.println("Texto do post: " + vetorPost[i].getCaixaTexto());
+								for(i=1; i < posts.size(); i++) {
+									for(int j = 0; j < posts.get(i).getCategorias().size(); j++) {
+										if(nome.equals(posts.get(i).getCategorias().get(j).getCategoria())) {
+											System.out.println("========================================================");
+											System.out.println("Titulo: " + posts.get(i).getTituloPost()); 
+											System.out.println("Data: " + posts.get(i).getData());
+											//System.out.println("Categoria: " + posts.get(i).getCategorias().);
+											System.out.println("Texto do post: " + posts.get(i).getCaixaTexto());
+										}
 									}
 								}
 								if(indicePost>1) {
