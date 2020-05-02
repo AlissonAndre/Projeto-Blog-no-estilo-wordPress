@@ -2,13 +2,23 @@ package Componentes;
 import java.util.Random;
 public class Anuncio {
 	private int valorAleatorio;
+	private String numeroDaConta;
+	private int numeroDeAnuncios = 10;
+	private float ganhos = 0;
+
+	public Anuncio(String numeroDaConta) {
+		this.numeroDaConta = numeroDaConta;
+	}
+	
+	public Anuncio(String numeroDaConta, int alterarNumeroAnuncios) {
+		this.numeroDaConta = numeroDaConta;
+		this.numeroDeAnuncios = alterarNumeroAnuncios;
+	}
 	
 	Random num = new Random();
-	
-	
 	public void anuncio() {
 		
-		switch(valorAleatorio = num.nextInt(10)) {
+		switch(valorAleatorio = num.nextInt(numeroDeAnuncios)) {
 			
 			case 0: 
 				System.out.println("\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");

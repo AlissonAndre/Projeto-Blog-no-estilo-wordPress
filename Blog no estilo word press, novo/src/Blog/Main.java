@@ -13,6 +13,7 @@ public class Main {
 		//Criação dos vetores de objeto
 		ArrayList<Publicacao> posts = new ArrayList<Publicacao>();
 		Categoria categoria = new Categoria();
+		CadastroConta conta;
 		int indicePost = 0;
 		int numeroPostsVerificacao = 1;
 		int indicePagina = 1;
@@ -22,13 +23,22 @@ public class Main {
 		int valor1;
 		int valor2;
 		int variavelDeControleCategoria = 0;
+		int verificadorQtdDeAutores = 0;
+		int variavelDeControleDoTipoDeConta;
+		int valorDeAnuncios;
+		int verificadorDeMonetizacao  = 1;
+		
 		ArrayList<Pagina> paginas = new ArrayList<Pagina>();
-		Anuncio anuncio = new Anuncio();
+		Anuncio anuncio;
+		Anuncio anunciado;
+		Publicacao novaPublicacao;
 		
 		//Variaveis do sistema
 		String tituloPublicacao;
 		String data;
-		String caixaTexto; 
+		String caixaTexto;
+		String Autor1;
+		String Autor2;
 		int saida = 0;
 		String nome;
 		int opt;
@@ -42,11 +52,34 @@ public class Main {
 		String senha = leitor.nextLine(); 
 		
 		//Nome do blog
-		System.out.println("Conta criada com sucesso!\nDigite o título do seu blog: ");
+		System.out.println("Digite o título do seu blog: ");
 		String nomeBlog = leitor.nextLine();	
-		System.out.println("Conta criada com sucesso!");
-		CadastroConta conta = new CadastroConta(email, senha, nomeBlog);
+		System.out.println("Deseja que os posts da sua conta sejam monetizados? \nSe sim digite 1, se não digite 2:");
+		variavelDeControleDoTipoDeConta = leitor.nextInt();
+		leitor.nextLine();
+		if(variavelDeControleDoTipoDeConta == 1) {
+			System.out.println("Digite o numero da sua conta bancaria a seguir: ");
+			String numeroConta = leitor.nextLine();
+			conta = new CadastroConta(email, senha, nomeBlog, numeroConta);
+			verificadorDeMonetizacao = 2;
+			System.out.println("Conta Monetizada!\nPossuimos um leque padrão de 10 anuncios!\nDeseja diminuir esse leque?"
+					+ "\nSe optar por diminuir, as chances de um anuncio em especifico aparecer no acesso de algum de seus posts\n"
+					+ "será maior. Digite 1 para manter o tamanho padrão, ou digite 2 para diminui-lo: ");
+			valorDeAnuncios = leitor.nextInt();
+			if(valorDeAnuncios == 2) {
+				System.out.println("Digite um valor menor do que 10: ");
+				valorDeAnuncios = leitor.nextInt();
+				anuncio = new Anuncio(numeroConta, valorDeAnuncios);
+			}else
+				anuncio = new Anuncio(numeroConta);
+		}else {
+			conta = new CadastroConta(email, senha, nomeBlog);
+			String semNumero = " ";
+			anuncio= new Anuncio(semNumero);
+		}
 		
+		
+		System.out.println("Conta criada com sucesso!");
 		
 		do {
 			System.out.println("\nPara fazer um novo post, digite 1: \n"
@@ -70,16 +103,32 @@ public class Main {
 					data = leitor.nextLine();
 					//Print de teste
 					System.out.println("Data: " + data);
-					
-					
 						
 					//Assunto do post
 					System.out.println("Digite seu texto aqui: ");
 					caixaTexto = leitor.nextLine();
 					System.out.println("Post: " + caixaTexto);
 					
-					//Construtor classe publicacao
-					Publicacao nova = new Publicacao(tituloPublicacao, data, caixaTexto);
+					//Construtor da classe publicacao
+					System.out.println("Digite 1 a seguir para informar o Autor desta publicação. \n"
+							+ "Ou digite 2 se estiver fazendo uma publicação em conjunto com outro autor!");
+					System.out.println("Nosso sistema é limitado a no máximo dois autores por post! ");
+					System.out.println("Faça sua escolha: ");
+					verificadorQtdDeAutores = leitor.nextInt();
+					leitor.nextLine();
+					
+					if(verificadorQtdDeAutores == 1) {
+						System.out.println("Digite o nome do Autor: ");
+						Autor1 = leitor.nextLine();
+						novaPublicacao = new Publicacao(tituloPublicacao, data, caixaTexto, Autor1);
+					}else {
+						System.out.println("Digite o nome do primeiro Autor: ");
+						Autor1 = leitor.nextLine();
+						System.out.println("Digite o nome do segundo Autor: ");
+						Autor2 = leitor.nextLine();
+						novaPublicacao = new Publicacao(tituloPublicacao, data, caixaTexto, Autor1, Autor2);
+					}
+					
 					
 					
 					//Categoria
@@ -88,7 +137,7 @@ public class Main {
 						System.out.println("Escolha uma categoria uma categoria para o seu post: ");
 						categoria = new Categoria(); 
 						categoria.setCategoria(leitor.nextLine());
-						nova.adicionarCategoria(categoria);
+						novaPublicacao.adicionarCategoria(categoria);
 						
 						System.out.println("Digite 0 para adicionar mais uma categoria a esse post, ou 1 para continuar: ");
 						variavelDeControleCategoria = leitor.nextInt();
@@ -103,7 +152,7 @@ public class Main {
 						opcao = leitor.nextInt();
 						if(opcao == 1) {
 							System.out.println("Deu certo!");
-							posts.add(nova); 
+							posts.add(novaPublicacao); 
 							//Controle de paginas, nao esta funcionando
 							//Indice post representa o numero do post atual
 							System.out.println("Post: " + indicePost);
@@ -167,10 +216,16 @@ public class Main {
 										System.out.println("Categoria: " + posts.get(i).getCategorias().get(k).getCategoria());
 									}
 									System.out.println("Texto do post: " + posts.get(i).getCaixaTexto());
-									System.out.println("Email autor: " + conta.getEmail());
+									
+									for(k = 0; k < posts.get(i).getAutor().size(); k++) {
+										System.out.println("Nome do autor: " + posts.get(i).getAutor().get(k));
+									}
+									System.out.println("Email do Blog: " + conta.getEmail());
 									i++;
-									System.out.println("\n$$$$ ANUNCIO $$$");
-									anuncio.anuncio();
+									if(verificadorDeMonetizacao  == 2) {
+										System.out.println("\n$$$$ ANUNCIO $$$");
+										anuncio.anuncio();
+									}									
 								}
 								
 								System.out.println("========================================================");
@@ -189,9 +244,15 @@ public class Main {
 											System.out.println("Categoria: " + posts.get(i).getCategorias().get(k).getCategoria());
 										}
 										System.out.println("Texto do post: " + posts.get(i).getCaixaTexto());
+										for(k = 0; k < posts.get(i).getAutor().size(); k++) {
+											System.out.println("Nome do autor: " + posts.get(i).getAutor().get(k));
+										}
+										System.out.println("Email do Blog: " + conta.getEmail());
 										System.out.println("Email autor: " + conta.getEmail());
-										System.out.println("\n$$$$ ANUNCIO $$$");
-										anuncio.anuncio();
+										if(verificadorDeMonetizacao  == 2) {
+											System.out.println("\n$$$$ ANUNCIO $$$");
+											anuncio.anuncio();
+										}
 									}
 								}
 								System.out.println("========================================================");
@@ -213,6 +274,10 @@ public class Main {
 											System.out.println("Categoria: " + posts.get(valor1).getCategorias().get(k).getCategoria());
 										}
 										System.out.println("Texto do post: " + posts.get(valor1).getCaixaTexto());
+										for(k = 0; k < posts.get(valor1).getAutor().size(); k++) {
+											System.out.println("Nome do autor: " + posts.get(valor1).getAutor().get(k));
+										}
+										System.out.println("Email do Blog: " + conta.getEmail());
 										System.out.println("Email autor: " + conta.getEmail());	
 										valor2 = paginas.get(pagina).getPost2();
 										valor2++;
@@ -224,14 +289,20 @@ public class Main {
 												System.out.println("Categoria: " + posts.get(valor2).getCategorias().get(k).getCategoria());
 											}
 											System.out.println("Texto do post: " + posts.get(valor2).getCaixaTexto());
+											for(k = 0; k < posts.get(valor2).getAutor().size(); k++) {
+												System.out.println("Nome do autor: " + posts.get(valor2).getAutor().get(k));
+											}
+											System.out.println("Email do Blog: " + conta.getEmail());
 											System.out.println("Email autor: " + conta.getEmail());	
 										}
 									}	
 								}else
 									System.out.println("Pagina não existe!");
 								
-								System.out.println("\n$$$$ ANUNCIO $$$");
-								anuncio.anuncio();
+								if(verificadorDeMonetizacao  == 2) {
+									System.out.println("\n$$$$ ANUNCIO $$$");
+									anuncio.anuncio();
+								}
 								System.out.println("========================================================");
 								break;
 								
@@ -249,12 +320,18 @@ public class Main {
 												System.out.println("Categoria: " + posts.get(i).getCategorias().get(k).getCategoria());
 											}
 											System.out.println("Texto do post: " + posts.get(i).getCaixaTexto());
+											for(k = 0; k < posts.get(i).getAutor().size(); k++) {
+												System.out.println("Nome do autor: " + posts.get(i).getAutor().get(k));
+											}
+											System.out.println("Email do Blog: " + conta.getEmail());
 										}
 									}
 								}
 								if(indicePost>1) {
-									System.out.println("\n$$$$ ANUNCIO $$$");
-									anuncio.anuncio();
+									if(verificadorDeMonetizacao  == 2) {
+										System.out.println("\n$$$$ ANUNCIO $$$");
+										anuncio.anuncio();
+									}
 								}
 								System.out.println("========================================================");
 								break;

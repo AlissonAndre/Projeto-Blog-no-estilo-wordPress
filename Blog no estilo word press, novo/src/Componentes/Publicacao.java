@@ -9,22 +9,40 @@ public class Publicacao {
 	private String tituloPost;
 	private String data;
 	private String caixaTexto;
-	private String sobreAutor;
 	
+	private ArrayList<String> Autor;
 	private ArrayList<Categoria> categorias;
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	//construtor
-	public Publicacao(String tituloPost, String data, String caixaTexto) {
+	public Publicacao(String tituloPost, String data, String caixaTexto, String Autor) {
 		this.tituloPost = tituloPost;
 		this.data = data;
 		this.caixaTexto = caixaTexto;
 		this.categorias = new ArrayList<Categoria>();
+		this.Autor = new ArrayList<String>();
+		this.Autor.add(Autor);
+	}
+	
+	public Publicacao(String tituloPost, String data, String caixaTexto, String Autor, String Autor2) {
+		this.tituloPost = tituloPost;
+		this.data = data;
+		this.caixaTexto = caixaTexto;
+		this.categorias = new ArrayList<Categoria>();
+		this.Autor = new ArrayList<String>();
+		this.Autor.add(0, Autor);
+		this.Autor.add(1, Autor2);
 	}
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
+	public ArrayList<String> getAutor() {
+		return Autor;
+	}
+
+	public void setAutor(ArrayList<String> autor) {
+		Autor = autor;
+	}
+
 	public ArrayList<Categoria> getCategorias() {
 		return categorias;
 	}
@@ -76,11 +94,4 @@ public class Publicacao {
 		this.caixaTexto = caixaTexto;
 	}
 
-	public String getSobreAutor() {
-		return sobreAutor;
-	}
-	
-	public void setSobreAutor(String sobreAutor) {
-		this.sobreAutor = sobreAutor;
-	}
 }
