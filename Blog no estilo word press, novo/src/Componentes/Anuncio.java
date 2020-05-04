@@ -1,10 +1,10 @@
 package Componentes;
 import java.util.Random;
 public class Anuncio {
-	private int valorAleatorio;
+	int valorAleatorio;
 	private String numeroDaConta;
 	private int numeroDeAnuncios = 10;
-	private float ganhos = 0;
+	private float ganhos;
 
 	public Anuncio(String numeroDaConta) {
 		this.numeroDaConta = numeroDaConta;
@@ -13,8 +13,25 @@ public class Anuncio {
 	public Anuncio(String numeroDaConta, int alterarNumeroAnuncios) {
 		this.numeroDaConta = numeroDaConta;
 		this.numeroDeAnuncios = alterarNumeroAnuncios;
+		this.ganhos = 0;
 	}
 	
+	public String getNumeroDaConta() {
+		return numeroDaConta;
+	}
+
+	public void setNumeroDaConta(String numeroDaConta) {
+		this.numeroDaConta = numeroDaConta;
+	}
+
+	public float getGanhos() {
+		return ganhos;
+	}
+
+	public void setGanhos(float ganhos) {
+		this.ganhos = ganhos;
+	}
+
 	Random num = new Random();
 	public void anuncio() {
 		

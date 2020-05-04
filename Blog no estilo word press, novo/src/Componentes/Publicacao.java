@@ -55,11 +55,9 @@ public class Publicacao {
 		// Se ja houver essa categoria nessa lista, a categoria não é adicionada
 		for(int indice = 0; indice < categorias.size(); indice++)
 			if(categorias.get(indice).getCategoria().contentEquals(categoria.getCategoria()))
-				return;
-		
+				return;	
 		categorias.add(categoria);	
 	}
-	
 	
 	public void removerCategoria(Categoria categoria) {
 		// Se ja houver essa categoria nessa lista, ele remove a categoria do indice
@@ -68,6 +66,7 @@ public class Publicacao {
 				categorias.remove(indice);
 				return;
 	}
+	
 	
 	//getter e setters
 	public String getTituloPost() {

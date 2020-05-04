@@ -15,6 +15,14 @@ public class CadastroConta {
 		this.tipoDaconta = "nao monetizada";
 	}
 	
+	public CadastroConta(String email, String senha, String nomeBlog, String numeroDaConta) {
+		this.email = email;
+		this.senha = senha;
+		this.nomeBlog = nomeBlog;
+		this.contaBancaria = numeroDaConta;
+		this.tipoDaconta = "monetizada";
+	}
+	
 	public String getTipoDaconta() {
 		return tipoDaconta;
 	}
@@ -23,13 +31,7 @@ public class CadastroConta {
 		this.tipoDaconta = tipoDaconta;
 	}
 
-	public CadastroConta(String email, String senha, String nomeBlog, String numeroDaConta) {
-		this.email = email;
-		this.senha = senha;
-		this.nomeBlog = nomeBlog;
-		this.contaBancaria = numeroDaConta;
-		this.tipoDaconta = "monetizada";
-	}
+	
 	
 	public String getContaBancaria() {
 		return contaBancaria;

@@ -27,10 +27,13 @@ public class Main {
 		int variavelDeControleDoTipoDeConta;
 		int valorDeAnuncios;
 		int verificadorDeMonetizacao  = 1;
+		int indiceAserAtualizado;
+		
+		
+		String atualizarDados;
 		
 		ArrayList<Pagina> paginas = new ArrayList<Pagina>();
 		Anuncio anuncio;
-		Anuncio anunciado;
 		Publicacao novaPublicacao;
 		
 		//Variaveis do sistema
@@ -84,7 +87,8 @@ public class Main {
 		do {
 			System.out.println("\nPara fazer um novo post, digite 1: \n"
 					+ "Para listar os posts, digite 2: \n"
-					+ "Para encerrar o programa, digite 3:\n ");
+					+ "Para editar ou remover um Post, digite 3: \n"
+					+ "Para encerrar o programa, digite 4: \n ");
 			
 			switch(opt = leitor.nextInt()) {
 				
@@ -128,8 +132,6 @@ public class Main {
 						Autor2 = leitor.nextLine();
 						novaPublicacao = new Publicacao(tituloPublicacao, data, caixaTexto, Autor1, Autor2);
 					}
-					
-					
 					
 					//Categoria
 					variavelDeControleCategoria = 0;
@@ -210,7 +212,7 @@ public class Main {
 							case 1: 
 								i=0;
 								while(i < posts.size()){
-									System.out.println("Titulo: " + posts.get(i).getTituloPost()); 
+									System.out.println("\nTitulo: " + posts.get(i).getTituloPost()); 
 									System.out.println("Data: " + posts.get(i).getData());
 									for(k = 0; k < posts.get(i).getCategorias().size(); k++) {
 										System.out.println("Categoria: " + posts.get(i).getCategorias().get(k).getCategoria());
@@ -341,10 +343,64 @@ public class Main {
 								break;
 					}
 					break;
-					
-				//Sair do lista	
+										
 				case 3:
-					saida = 3;
+					//Editar Post por indice
+					System.out.println("Digite 1 para editar um post pelo indice, \nou digite 2 para remover um post por indice: ");
+					indiceAserAtualizado = leitor.nextInt();
+					leitor.nextLine();
+					if(indiceAserAtualizado == 1) {
+						System.out.println("Digite o indice do post a ser atualizado: ");
+						indiceAserAtualizado = leitor.nextInt();
+						leitor.nextLine();
+						System.out.println("Digite 1 se deseja atualizar o titulo, data e texto da publicação: "
+								+ "\nDigite 2 se deseja editar uma categoria ou mais categorias do post: ");
+						i = leitor.nextInt();
+						leitor.nextLine();
+						if(i == 1) {
+							System.out.println("Digite o novo titulo: ");
+							atualizarDados = leitor.nextLine();
+							posts.get(indiceAserAtualizado).setTituloPost(atualizarDados);
+							System.out.println("Digite a nova data: ");
+							atualizarDados = leitor.nextLine();
+							posts.get(indiceAserAtualizado).setData(atualizarDados);
+							System.out.println("Digite o novo texto: ");
+							atualizarDados = leitor.nextLine();
+							posts.get(indiceAserAtualizado).setCaixaTexto(atualizarDados);
+							System.out.println("Edição concluida!");
+						}else if(i == 2) {
+							System.out.println("Escolha uma categoria entre as castegorias a seguir para alterar! ");
+							for(i = 0; i < posts.get(indiceAserAtualizado).getCategorias().size(); i ++) {
+								System.out.println(" Categoria: "  
+								+ posts.get(indiceAserAtualizado).getCategorias().get(i).getCategoria());
+							}
+							System.out.println("Digite a categoria escolhida para alterar : ");
+							Categoria cat = new Categoria();
+						    cat.setCategoria(leitor.nextLine());
+						    posts.get(indiceAserAtualizado).removerCategoria(cat);
+						    
+						    System.out.println("Digite o novo nome da categoria: ");
+						    cat.setCategoria(leitor.nextLine());
+						    posts.get(indiceAserAtualizado).adicionarCategoria(cat);
+		
+							System.out.println("Edição concluida!");
+						}else {
+							System.out.println("Escolha invalida! Volte ao menu!");
+						}
+						
+					}else if(indiceAserAtualizado == 2) {
+						System.out.println("Digite o indice do post a ser removido: ");
+						indiceAserAtualizado = leitor.nextInt();
+						leitor.nextLine();
+						posts.remove(indiceAserAtualizado);
+					}else {
+						System.out.println("Indice invalido!");
+					}
+					
+					break;
+				//Sair do lista	
+				case 4:
+					saida = 4;
 					System.out.println("Sistema encerrado!");
 					break;
 				
@@ -352,6 +408,6 @@ public class Main {
 					System.out.println("\nOpção invalida tente novamente!\n");
 					break;
 				}
-			}while(saida != 3);
+			}while(saida != 4);
 		}
 	}
