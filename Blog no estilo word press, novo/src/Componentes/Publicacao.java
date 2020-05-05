@@ -2,7 +2,7 @@ package Componentes;
 
 import java.util.ArrayList;
 
-public class Publicacao {
+public class Publicacao extends CadastroConta {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//ATRIBUTOS
@@ -15,7 +15,8 @@ public class Publicacao {
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	//construtor
-	public Publicacao(String tituloPost, String data, String caixaTexto, String Autor) {
+	public Publicacao(CadastroConta conta, String tituloPost, String data, String caixaTexto, String Autor) {
+		super(conta.getEmail(), conta.getSenha(), conta.getNomeBlog());
 		this.tituloPost = tituloPost;
 		this.data = data;
 		this.caixaTexto = caixaTexto;
@@ -24,7 +25,8 @@ public class Publicacao {
 		this.Autor.add(Autor);
 	}
 	
-	public Publicacao(String tituloPost, String data, String caixaTexto, String Autor, String Autor2) {
+	public Publicacao(CadastroConta conta, String tituloPost, String data, String caixaTexto, String Autor, String Autor2) {
+		super(conta.getEmail(), conta.getSenha(), conta.getNomeBlog());
 		this.tituloPost = tituloPost;
 		this.data = data;
 		this.caixaTexto = caixaTexto;

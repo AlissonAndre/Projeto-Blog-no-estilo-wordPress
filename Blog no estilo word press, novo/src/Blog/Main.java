@@ -14,6 +14,10 @@ public class Main {
 		ArrayList<Publicacao> posts = new ArrayList<Publicacao>();
 		Categoria categoria = new Categoria();
 		CadastroConta conta;
+		ArrayList<Pagina> paginas = new ArrayList<Pagina>();
+		Anuncio anuncio;
+		Publicacao novaPublicacao;
+		
 		int indicePost = 0;
 		int numeroPostsVerificacao = 1;
 		int indicePagina = 1;
@@ -28,13 +32,9 @@ public class Main {
 		int valorDeAnuncios;
 		int verificadorDeMonetizacao  = 1;
 		int indiceAserAtualizado;
-		
-		
+		int verificadorDeTema;
 		String atualizarDados;
-		
-		ArrayList<Pagina> paginas = new ArrayList<Pagina>();
-		Anuncio anuncio;
-		Publicacao novaPublicacao;
+	
 		
 		//Variaveis do sistema
 		String tituloPublicacao;
@@ -42,11 +42,18 @@ public class Main {
 		String caixaTexto;
 		String Autor1;
 		String Autor2;
+		// Variaveis do tema de paginas
+		Pagina tema = new Pagina(0,0,0);
+		String corPagina = "branco" ;
+		String corTexto = "preta"; 
+		String textoMeio;
+		String textoMaisAdireita;
+		String textoMaisAesquerda;
+		
 		int saida = 0;
 		String nome;
 		int opt;
 		Scanner leitor = new Scanner(System.in);
-		
 		//Cadastro de dados da conta
 		System.out.println("Bem vindo! \nCadastre sua conta agora: ");
 		System.out.println("Primeiro digite seu email: ");
@@ -72,17 +79,57 @@ public class Main {
 			if(valorDeAnuncios == 2) {
 				System.out.println("Digite um valor menor do que 10: ");
 				valorDeAnuncios = leitor.nextInt();
-				anuncio = new Anuncio(numeroConta, valorDeAnuncios);
+				anuncio = new Anuncio(conta, numeroConta, valorDeAnuncios);
 			}else
-				anuncio = new Anuncio(numeroConta);
+				anuncio = new Anuncio(conta, numeroConta);
 		}else {
 			conta = new CadastroConta(email, senha, nomeBlog);
 			String semNumero = " ";
-			anuncio= new Anuncio(semNumero);
+			anuncio = new Anuncio(conta, semNumero);
 		}
 		
-		
 		System.out.println("Conta criada com sucesso!");
+		
+		System.out.println("Possuimos um conjunto de atributos visuais prontinhas para iniciar o seu blog!"
+				+ "\nDeseja alterar estes atributos? Se sim digite 2, se não digite 1: ");
+		verificadorDeTema = leitor.nextInt();
+		leitor.nextLine();
+		if(verificadorDeTema == 2) {
+			System.out.println("Digite a seguir a cor de fundo de pagina desejada: ");
+			corPagina = leitor.nextLine();
+			tema.setCorDaPagina(corPagina);
+			
+			System.out.println("Digite a seguir a cor do texto desejada: ");
+			corTexto = leitor.nextLine();
+			tema.setCorDoTexto(corTexto);
+			
+			System.out.println("Escolha a seguir a localização do texto: ");
+			System.out.println("1: Texto no meio da pagina: \n"
+					+ "2: Texto Mais a esquerda da Página: \n3: Texto Mais a direita da Página:"
+					+ "\nDigite o valor numerico de uma dessas opções, por favor : ");
+			 switch (opt = leitor.nextInt()) {
+			 		case 1:
+			 			textoMeio = "ok";
+			 			tema.setTextoNoMeio(textoMeio);
+			 			break;
+			 		case 2:
+			 			textoMaisAesquerda = "ok";
+			 			tema.setTextoMaisAesquerda(textoMaisAesquerda);
+			 			break;
+			 		case 3:
+			 			textoMaisAdireita = "ok";
+			 			tema.setTextoMaisAdireita(textoMaisAdireita);
+			 			break;
+			 }
+			
+			System.out.println("Modificação de padrão concluida!");
+			
+		}else{
+			tema.setCorDaPagina(corPagina);
+			tema.setCorDoTexto(corTexto);
+			textoMeio = "ok";
+			tema.setTextoNoMeio(textoMeio);
+		}
 		
 		do {
 			System.out.println("\nPara fazer um novo post, digite 1: \n"
@@ -124,13 +171,13 @@ public class Main {
 					if(verificadorQtdDeAutores == 1) {
 						System.out.println("Digite o nome do Autor: ");
 						Autor1 = leitor.nextLine();
-						novaPublicacao = new Publicacao(tituloPublicacao, data, caixaTexto, Autor1);
+						novaPublicacao = new Publicacao(conta, tituloPublicacao, data, caixaTexto, Autor1);
 					}else {
 						System.out.println("Digite o nome do primeiro Autor: ");
 						Autor1 = leitor.nextLine();
 						System.out.println("Digite o nome do segundo Autor: ");
 						Autor2 = leitor.nextLine();
-						novaPublicacao = new Publicacao(tituloPublicacao, data, caixaTexto, Autor1, Autor2);
+						novaPublicacao = new Publicacao(conta, tituloPublicacao, data, caixaTexto, Autor1, Autor2);	
 					}
 					
 					//Categoria
@@ -162,18 +209,21 @@ public class Main {
 							//Quando existir apenas o primeiro post, esse if armazenara o numero dos posts na pagina, 
 							//isso servirá para a listagem de posts por pagina
 							int nPost = indicePost;
-							Pagina pag = new Pagina();
+							Pagina pag = new Pagina(0, 0, 0);
+							
 							if(indicePost == 0) {
+								pag = new Pagina(0, 0, 0, tema);
 								pag.setPost1(nPost);
 								pag.setPost2(nPost++);
 								indicePagina = 1;
 								pag.setNumeroPagina(indicePagina);
+								
 								paginas.add(pag);
 								
 							}else if( numeroPostsVerificacao <  indicePost){
 									numeroPostsVerificacao = indicePost;
 									nPost = indicePost;
-									pag = new Pagina();
+									pag = new Pagina(0,0,0, tema);
 									pag.setPost1(nPost); 
 									pag.setPost2(nPost++);
 									indicePagina++;
@@ -227,7 +277,8 @@ public class Main {
 									if(verificadorDeMonetizacao  == 2) {
 										System.out.println("\n$$$$ ANUNCIO $$$");
 										anuncio.anuncio();
-									}									
+									}		
+									paginas.get(0).imprimeCores();
 								}
 								
 								System.out.println("========================================================");
@@ -257,6 +308,7 @@ public class Main {
 										}
 									}
 								}
+								paginas.get(0).imprimeCores();
 								System.out.println("========================================================");
 								break;
 								
@@ -305,6 +357,7 @@ public class Main {
 									System.out.println("\n$$$$ ANUNCIO $$$");
 									anuncio.anuncio();
 								}
+								paginas.get(0).imprimeCores();
 								System.out.println("========================================================");
 								break;
 								
@@ -335,6 +388,7 @@ public class Main {
 										anuncio.anuncio();
 									}
 								}
+								paginas.get(0).imprimeCores();
 								System.out.println("========================================================");
 								break;
 								

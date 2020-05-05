@@ -31,22 +31,12 @@ public class CadastroConta {
 		this.tipoDaconta = tipoDaconta;
 	}
 
-	
-	
 	public String getContaBancaria() {
 		return contaBancaria;
 	}
 
-	public void setContaBancaria(String contaBancaria) {
-		this.contaBancaria = contaBancaria;
-	}
-
 	public String getEmail() {
 		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getSenha() {
@@ -59,9 +49,5 @@ public class CadastroConta {
 	
 	public String getNomeBlog() {
 		return nomeBlog;
-	}
-
-	public void setNomeBlog(String nomeBlog) {
-		this.nomeBlog = nomeBlog;
 	}
 }

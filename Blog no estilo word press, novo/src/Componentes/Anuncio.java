@@ -1,16 +1,20 @@
 package Componentes;
 import java.util.Random;
-public class Anuncio {
+
+public class Anuncio extends CadastroConta {
 	int valorAleatorio;
 	private String numeroDaConta;
 	private int numeroDeAnuncios = 10;
 	private float ganhos;
+	
 
-	public Anuncio(String numeroDaConta) {
+	public Anuncio(CadastroConta c, String numeroDaConta) {
+		super(c.getEmail(), c.getSenha(), c.getNomeBlog());
 		this.numeroDaConta = numeroDaConta;
 	}
 	
-	public Anuncio(String numeroDaConta, int alterarNumeroAnuncios) {
+	public Anuncio(CadastroConta c, String numeroDaConta, int alterarNumeroAnuncios) {
+		super(c.getEmail(), c.getSenha(), c.getNomeBlog());
 		this.numeroDaConta = numeroDaConta;
 		this.numeroDeAnuncios = alterarNumeroAnuncios;
 		this.ganhos = 0;
