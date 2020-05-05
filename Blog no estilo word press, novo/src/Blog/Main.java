@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		//Criação dos vetores de objeto
 		ArrayList<Publicacao> posts = new ArrayList<Publicacao>();
-		Categoria categoria = new Categoria();
+		Categoria categoria = new Categoria("");
 		CadastroConta conta;
 		ArrayList<Pagina> paginas = new ArrayList<Pagina>();
 		Anuncio anuncio;
@@ -23,10 +23,12 @@ public class Main {
 		int indicePagina = 1;
 		int i=0;
 		int k=0;
+		int l=0;
 		int pagina = 0;
 		int valor1;
 		int valor2;
 		int variavelDeControleCategoria = 0;
+		int variavelControleDeGenero = 0;
 		int verificadorQtdDeAutores = 0;
 		int variavelDeControleDoTipoDeConta;
 		int valorDeAnuncios;
@@ -49,6 +51,7 @@ public class Main {
 		String textoMeio;
 		String textoMaisAdireita;
 		String textoMaisAesquerda;
+		String genero;
 		
 		int saida = 0;
 		String nome;
@@ -184,9 +187,22 @@ public class Main {
 					variavelDeControleCategoria = 0;
 					while(variavelDeControleCategoria == 0) {
 						System.out.println("Escolha uma categoria uma categoria para o seu post: ");
-						categoria = new Categoria(); 
+						categoria = new Categoria(""); 
 						categoria.setCategoria(leitor.nextLine());
 						novaPublicacao.adicionarCategoria(categoria);
+						
+						variavelControleDeGenero = 1;
+						while(variavelControleDeGenero == 1) {
+							System.out.println("Deseja adicionar algum genero a esta categoria?\nSe sim digite 1, se não 2: ");
+							variavelControleDeGenero = leitor.nextInt();
+							leitor.nextLine();
+							if(variavelControleDeGenero == 1) {
+								System.out.println("Digite o genero desejado: ");
+								genero = leitor.nextLine();
+								categoria.AdicionarGenero(genero);
+							}else if(variavelControleDeGenero == 2) 
+								break;
+						}
 						
 						System.out.println("Digite 0 para adicionar mais uma categoria a esse post, ou 1 para continuar: ");
 						variavelDeControleCategoria = leitor.nextInt();
@@ -194,6 +210,8 @@ public class Main {
 						if(variavelDeControleCategoria == 1)
 							break;
 					}
+					
+					
 					
 					while(true) {
 						System.out.println("Digite 1 para salvar e publicar o post, ou digite 2 para apaga-lo: ");
@@ -266,7 +284,8 @@ public class Main {
 									System.out.println("Data: " + posts.get(i).getData());
 									for(k = 0; k < posts.get(i).getCategorias().size(); k++) {
 										System.out.println("Categoria: " + posts.get(i).getCategorias().get(k).getCategoria());
-									}
+										posts.get(i).getCategorias().get(k).imprimeGenero(posts.get(i).getCategorias().get(k).getGenero());
+									}	
 									System.out.println("Texto do post: " + posts.get(i).getCaixaTexto());
 									
 									for(k = 0; k < posts.get(i).getAutor().size(); k++) {
@@ -295,6 +314,7 @@ public class Main {
 										System.out.println("Data: " + posts.get(i).getData());
 										for(k = 0; k < posts.get(i).getCategorias().size(); k++) {
 											System.out.println("Categoria: " + posts.get(i).getCategorias().get(k).getCategoria());
+											posts.get(i).getCategorias().get(k).imprimeGenero(posts.get(i).getCategorias().get(k).getGenero());
 										}
 										System.out.println("Texto do post: " + posts.get(i).getCaixaTexto());
 										for(k = 0; k < posts.get(i).getAutor().size(); k++) {
@@ -326,6 +346,7 @@ public class Main {
 										System.out.println("Data: " + posts.get(valor1).getData());
 										for(k = 0; k < posts.get(valor1).getCategorias().size(); k++) {
 											System.out.println("Categoria: " + posts.get(valor1).getCategorias().get(k).getCategoria());
+											posts.get(i).getCategorias().get(k).imprimeGenero(posts.get(i).getCategorias().get(k).getGenero());
 										}
 										System.out.println("Texto do post: " + posts.get(valor1).getCaixaTexto());
 										for(k = 0; k < posts.get(valor1).getAutor().size(); k++) {
@@ -373,6 +394,7 @@ public class Main {
 											System.out.println("Data: " + posts.get(i).getData());
 											for(k = 0; k < posts.get(i).getCategorias().size(); k++) {
 												System.out.println("Categoria: " + posts.get(i).getCategorias().get(k).getCategoria());
+												posts.get(i).getCategorias().get(k).imprimeGenero(posts.get(i).getCategorias().get(k).getGenero());
 											}
 											System.out.println("Texto do post: " + posts.get(i).getCaixaTexto());
 											for(k = 0; k < posts.get(i).getAutor().size(); k++) {
@@ -429,7 +451,7 @@ public class Main {
 								+ posts.get(indiceAserAtualizado).getCategorias().get(i).getCategoria());
 							}
 							System.out.println("Digite a categoria escolhida para alterar : ");
-							Categoria cat = new Categoria();
+							Categoria cat = new Categoria("");
 						    cat.setCategoria(leitor.nextLine());
 						    posts.get(indiceAserAtualizado).removerCategoria(cat);
 						    

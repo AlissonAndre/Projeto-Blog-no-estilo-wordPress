@@ -4,7 +4,6 @@ public abstract class Tema {
 
 	private String corDaPagina;
 	private String corDoTexto;
-	
 	private String textoNoMeio;
 	private String textoMaisAesquerda;
 	private String textoMaisAdireita;
