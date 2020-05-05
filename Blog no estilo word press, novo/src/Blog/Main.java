@@ -15,6 +15,7 @@ public class Main {
 		Categoria categoria = new Categoria("");
 		CadastroConta conta;
 		ArrayList<Pagina> paginas = new ArrayList<Pagina>();
+		CadastroConta impressao = null;
 		Anuncio anuncio;
 		Publicacao novaPublicacao;
 		
@@ -175,12 +176,14 @@ public class Main {
 						System.out.println("Digite o nome do Autor: ");
 						Autor1 = leitor.nextLine();
 						novaPublicacao = new Publicacao(conta, tituloPublicacao, data, caixaTexto, Autor1);
+						impressao = new Publicacao(conta, tituloPublicacao, data, caixaTexto, Autor1);	
 					}else {
 						System.out.println("Digite o nome do primeiro Autor: ");
 						Autor1 = leitor.nextLine();
 						System.out.println("Digite o nome do segundo Autor: ");
 						Autor2 = leitor.nextLine();
 						novaPublicacao = new Publicacao(conta, tituloPublicacao, data, caixaTexto, Autor1, Autor2);	
+						impressao = new Publicacao(conta, tituloPublicacao, data, caixaTexto, Autor1, Autor2);	
 					}
 					
 					//Categoria
@@ -201,6 +204,7 @@ public class Main {
 								genero = leitor.nextLine();
 								categoria.AdicionarGenero(genero);
 							}else if(variavelControleDeGenero == 2) 
+								categoria.AdicionarGenero("");
 								break;
 						}
 						
@@ -291,7 +295,7 @@ public class Main {
 									for(k = 0; k < posts.get(i).getAutor().size(); k++) {
 										System.out.println("Nome do autor: " + posts.get(i).getAutor().get(k));
 									}
-									System.out.println("Email do Blog: " + conta.getEmail());
+									System.out.println("Email do Blog: " + impressao.getEmail());
 									i++;
 									if(verificadorDeMonetizacao  == 2) {
 										System.out.println("\n$$$$ ANUNCIO $$$");
@@ -320,8 +324,7 @@ public class Main {
 										for(k = 0; k < posts.get(i).getAutor().size(); k++) {
 											System.out.println("Nome do autor: " + posts.get(i).getAutor().get(k));
 										}
-										System.out.println("Email do Blog: " + conta.getEmail());
-										System.out.println("Email autor: " + conta.getEmail());
+										System.out.println("Email do Blog: " + impressao.getEmail());
 										if(verificadorDeMonetizacao  == 2) {
 											System.out.println("\n$$$$ ANUNCIO $$$");
 											anuncio.anuncio();
@@ -367,8 +370,7 @@ public class Main {
 											for(k = 0; k < posts.get(valor2).getAutor().size(); k++) {
 												System.out.println("Nome do autor: " + posts.get(valor2).getAutor().get(k));
 											}
-											System.out.println("Email do Blog: " + conta.getEmail());
-											System.out.println("Email autor: " + conta.getEmail());	
+											System.out.println("Email do Blog: " + impressao.getEmail());
 										}
 									}	
 								}else
@@ -400,7 +402,7 @@ public class Main {
 											for(k = 0; k < posts.get(i).getAutor().size(); k++) {
 												System.out.println("Nome do autor: " + posts.get(i).getAutor().get(k));
 											}
-											System.out.println("Email do Blog: " + conta.getEmail());
+											System.out.println("Email do Blog: " + impressao.getEmail());
 										}
 									}
 								}
