@@ -24,7 +24,6 @@ public class Main {
 		int indicePagina = 1;
 		int i=0;
 		int k=0;
-		int l=0;
 		int pagina = 0;
 		int valor1;
 		int valor2;
@@ -134,12 +133,12 @@ public class Main {
 			textoMeio = "ok";
 			tema.setTextoNoMeio(textoMeio);
 		}
-		
 		do {
 			System.out.println("\nPara fazer um novo post, digite 1: \n"
 					+ "Para listar os posts, digite 2: \n"
 					+ "Para editar ou remover um Post, digite 3: \n"
-					+ "Para encerrar o programa, digite 4: \n ");
+					+ "Para ver seus ganhos com anuncios, digite 4: \n"
+					+ "Para encerrar o programa, digite 5: \n ");
 			
 			switch(opt = leitor.nextInt()) {
 				
@@ -215,8 +214,6 @@ public class Main {
 							break;
 					}
 					
-					
-					
 					while(true) {
 						System.out.println("Digite 1 para salvar e publicar o post, ou digite 2 para apaga-lo: ");
 						int opcao;
@@ -277,9 +274,8 @@ public class Main {
 							+ "Digite 4 para listar posts por categoria: \n");
 					opt = leitor.nextInt();
 					leitor.nextLine();
-					System.out.println("Blog " + conta.getNomeBlog());
+					System.out.println("Blog " + impressao.getNomeBlog());
 					switch(opt) {
-							
 							//listar todos os posts
 							case 1: 
 								i=0;
@@ -303,7 +299,6 @@ public class Main {
 									}		
 									paginas.get(0).imprimeCores();
 								}
-								
 								System.out.println("========================================================");
 								break;
 								
@@ -432,7 +427,7 @@ public class Main {
 						indiceAserAtualizado = leitor.nextInt();
 						leitor.nextLine();
 						System.out.println("Digite 1 se deseja atualizar o titulo, data e texto da publicação: "
-								+ "\nDigite 2 se deseja editar uma categoria ou mais categorias do post: ");
+										 + "\nDigite 2 se deseja editar uma categoria ou mais categorias do post: ");
 						i = leitor.nextInt();
 						leitor.nextLine();
 						if(i == 1) {
@@ -476,9 +471,18 @@ public class Main {
 					}
 					
 					break;
-				//Sair do lista	
+				
 				case 4:
-					saida = 4;
+					if(verificadorDeMonetizacao == 2) {
+						System.out.println("Ganhos atuais: " + anuncio.getGanhos());
+					}else {
+						System.out.println("Sua conta não é monetizada!");
+					}
+					
+					break;
+				//Sair do lista	
+				case 5:
+					saida = 5;
 					System.out.println("Sistema encerrado!");
 					break;
 				
@@ -486,6 +490,6 @@ public class Main {
 					System.out.println("\nOpção invalida tente novamente!\n");
 					break;
 				}
-			}while(saida != 4);
+			}while(saida != 5);
 		}
 	}

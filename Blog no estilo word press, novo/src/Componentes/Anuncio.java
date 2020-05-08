@@ -5,7 +5,7 @@ public class Anuncio extends CadastroConta {
 	int valorAleatorio;
 	private String numeroDaConta;
 	private int numeroDeAnuncios = 10;
-	private float ganhos;
+	private double ganhos;
 	
 
 	public Anuncio(CadastroConta c, String numeroDaConta) {
@@ -28,13 +28,10 @@ public class Anuncio extends CadastroConta {
 		this.numeroDaConta = numeroDaConta;
 	}
 
-	public float getGanhos() {
+	public double getGanhos() {
 		return ganhos;
 	}
 
-	public void setGanhos(float ganhos) {
-		this.ganhos = ganhos;
-	}
 
 	Random num = new Random();
 	public void anuncio() {
@@ -45,18 +42,21 @@ public class Anuncio extends CadastroConta {
 				System.out.println("\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 				System.out.println("Supermecados Bruda: Comprem Conosco!!");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+				ganhos = ganhos + 0.7;
 				break;
 			
 			case 1: 
 				System.out.println("\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 				System.out.println("Supermecados Haag: Comprem Conosco!!");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+				ganhos = ganhos + 0.3;
 				break;	
 			
 			case 2: 
 				System.out.println("\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 				System.out.println("Oi, eu sou o Dollynho, seu amiguinho, vamos brincar??");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+				ganhos = ganhos + 2;
 				break;
 			
 			case 3: 
@@ -64,6 +64,7 @@ public class Anuncio extends CadastroConta {
 				System.out.println("A Casa dos Esportes é a loja de todas as torcidas. Grande promoção de camisetas do seu time do coração."
 						+ " \nAlém disso, tudo para a pratica esportivas seja qual for à modalidade. Visite a Casa dos Esportes");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+				ganhos = ganhos + 0.5;
 				break;	
 			
 			case 4: 
@@ -71,6 +72,7 @@ public class Anuncio extends CadastroConta {
 				System.out.println("O Dia dos Pais está chegando. Procurando um presente para ele? Pois nós temos a dica certa: Casa dos Esportes.\n "
 						+ "Lá você vai encontrar aquilo que procura para dizer através de um presente, o quanto ele é importante para você.");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+				ganhos = ganhos + 0.10;
 				break;
 				
 			case 5: 
@@ -82,6 +84,7 @@ public class Anuncio extends CadastroConta {
 						+ " Na hora de relaxar, relaxe com os melhores preços a vista, \n"
 						+ "as melhores condições a prazo e o atendimento da Casa dos Esportes.");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+				ganhos = ganhos + 0.30;
 				break;
 				
 			case 6: 
@@ -89,6 +92,7 @@ public class Anuncio extends CadastroConta {
 				System.out.println("Mantenha-se com boa saúde. Afinal ela é o bem mais precioso que você possui.\n"
 						+ " Sempre que ela inspirar cuidados, consulte o médico. Depois, traga sua receita até a farmácia Silva.");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+				ganhos = ganhos + 0.1;
 				break;	
 				
 			case 7: 
@@ -98,6 +102,7 @@ public class Anuncio extends CadastroConta {
 						+ "por professores capacitados e sintonizados com as rígidas leis do transito.\n"
 						+ " Bons motoristas saem do Centro de Formação de Condutores Malta.");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+				ganhos = ganhos + 0.8;
 				break;
 				
 			case 8: 
@@ -107,6 +112,7 @@ public class Anuncio extends CadastroConta {
 						+ "o que garante aquilo que vendemos. Seja moveis ou eletrodomésticos nossa loja têm aquilo que você procura. \n"
 						+ "Consulte nossas condições de pagamento ou apresente a sua proposta. Estamos prontos para negociar com você");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
+				ganhos = ganhos + 0.14;
 				break;	
 				
 			case 9: 
@@ -115,8 +121,8 @@ public class Anuncio extends CadastroConta {
 						+ "Atendimento de primeira. Quartos, apartamentos e suítes com o máximo de conforto, privacidade e tranqüilidade.\n"
 						+ " Silva Hotel conta com amplo estacionamento e tudo o que você procura num bom hotel.");
 				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n");
-				break;
-						
+				ganhos = ganhos + 0.20;
+				break;			
 		}
 	}	
 }
